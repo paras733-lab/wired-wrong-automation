@@ -1,0 +1,18 @@
+# Dependencies - reinstalled fresh by npm install / pip install every run
+node_modules/
+__pycache__/
+*.pyc
+
+# Build/render output - regenerated fresh every run, shouldn't be tracked
+out/
+temp_voice_clips/
+public/audio/*.mp3
+
+# Sensitive credentials - NEVER commit these
+client_secret.json
+*.token
+token.json
+
+# OS/editor junk
+.DS_Store
+Thumbs.db

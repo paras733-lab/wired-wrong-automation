@@ -1,0 +1,58 @@
+name: Generate and Render Video
+
+# Trigger this by pushing a new/updated narration_tagged.txt - that's the
+# ONLY file you touch to make a new video. Everything else runs automatically.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "src/scripts/narration_tagged.txt"
+
+jobs:
+  build-video:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install Node dependencies
+        run: npm install
+
+      - name: Install Python dependencies
+        run: pip install edge-tts
+
+      # Step 1: Turn your script into voiceover audio + timed scene data
+      - name: Generate voiceover and scene timing
+        run: python generate_multivoice.py
+
+      # Step 2: Fill in the visuals for each scene based on content
+      - name: Fill in scene visuals
+        run: python fill_beats.py
+
+      # Step 3: Render the actual video file
+      - name: Render video
+        run: npx remotion render src/index.ts Explainer out/video.mp4
+
+      - name: Upload rendered video
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-video
+          path: out/video.mp4
+
+      - name: Upload voiceover (for your own reference/reuse)
+        uses: actions/upload-artifact@v4
+        with:
+          name: voiceover-audio
+          path: public/audio/voiceover.mp3

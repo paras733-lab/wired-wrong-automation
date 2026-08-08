@@ -1,0 +1,23 @@
+{
+  "name": "explainer-channel-template",
+  "version": "1.0.0",
+  "description": "Script-driven, code-based explainer video template (CGP Grey style) built on Remotion. Feed it a JSON script, get a rendered video.",
+  "scripts": {
+    "start": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts Explainer out/video.mp4",
+    "build": "remotion bundle src/index.ts"
+},
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "remotion": "^4.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/react": "^18.0.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  }
+}
