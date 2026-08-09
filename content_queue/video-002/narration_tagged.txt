@@ -1,0 +1,73 @@
+[M] You finish a bad meal because you already paid for it.
+[M] You sit through a boring movie because you already bought the ticket.
+[M] You stay three more years in a job you hate because you already put in two.
+[F] None of that is loyalty.
+[M] None of it is patience.
+[M] It's a bug in your brain called the sunk cost fallacy, and it is quietly making almost every big decision in your life worse.
+[M] Here's the actual definition, stripped of jargon.
+[M] A sunk cost is money, time, or effort you've already spent and can never get back, no matter what you do next.
+[M] The fallacy is treating that unrecoverable cost as a reason to keep going, instead of only looking at what happens from this point forward.
+[F] Economists have known about this for decades.
+[M] The classic example is a government project.
+[M] Say a bridge to nowhere has already cost fifty million dollars, and finishing it will cost another fifty million, but the bridge will never actually be useful once it's done.
+[M] The rational move is to stop immediately.
+[M] The fifty million already spent is gone either way.
+[M] But people keep building it anyway, because stopping feels like admitting the first fifty million was wasted.
+[F] Finishing doesn't undo that waste.
+[M] It just adds fifty million more.
+[M] Your brain runs this exact same broken math on your own life, constantly.
+[M] The relationship you've invested six years into, that isn't working, and hasn't been working for two of those years.
+[M] The business idea you've sunk your savings into, that every signal says isn't going to work.
+[M] The degree you're three semesters into, in a field you now realize you don't actually want.
+[M] In every one of these, the honest question is never "how much have I already put in." It's only ever "given where I am right now, is continuing the best use of my next year."
+[M] Here's why this bias exists at all, because it's not random.
+[M] Admitting a sunk cost was wasted feels like admitting you were wrong.
+[M] And humans will go to remarkable lengths to avoid that feeling, even when the avoidance costs more than the original mistake.
+[F] Researchers call this loss aversion's evil twin.
+[M] Loss aversion says losing something hurts more than gaining the equivalent feels good.
+[M] The sunk cost fallacy is what happens when that pain gets pointed backward, at a loss that already happened and can't be changed, instead of forward at a future you can still control.
+[M] There's a famous casino experiment that shows how deep this runs.
+[M] Gamblers who'd already lost money took significantly bigger risks trying to win it back than gamblers who were simply choosing fresh bets with the same amount of money.
+[M] Same dollar amount.
+[M] Completely different decision, purely because of what had already been lost.
+[M] This is also, by the way, exactly why casinos design games to give you near misses.
+[M] Almost winning triggers the same "I'm owed a comeback" feeling that keeps the sunk cost fallacy running.
+[M] So how do you actually catch yourself doing this in real time.
+[F] Here's the test that works.
+[M] Imagine you woke up today with zero history in this situation.
+[M] No money spent, no time invested, no emotional attachment.
+[M] If this exact option was presented to you fresh, right now, would you choose it.
+[M] Not "would you have chosen it originally." Would you choose it today, from scratch, knowing what you know now.
+[M] If the answer is yes, keep going, and now you're continuing for the right reason, not the sunk cost.
+[M] If the answer is no, that's real information, and it has nothing to do with how much you've already invested.
+[M] It's telling you something about right now, not about the past.
+[M] There's a well documented business case that shows this exact mistake at massive scale.
+[M] A company spends years and enormous sums developing a product, and partway through, clear evidence emerges that the market has moved on and the product won't succeed.
+[M] The rational move is to stop immediately and redirect those remaining resources somewhere useful.
+[M] Instead, companies frequently push forward anyway, and the internal justification is almost always some version of "we've come too far to stop now." Coming far isn't a business reason.
+[M] It's the sunk cost fallacy wearing a suit, and it has killed products, and sometimes entire companies, that would have survived if the founders had simply asked what a fresh decision-maker would choose today.
+[M] This same pattern shows up in something as ordinary as an argument with a partner.
+[M] You've been arguing for forty minutes about something increasingly minor, and neither of you actually wants to keep arguing, but stopping now feels like it would waste the forty minutes already spent, so the argument drags on for another twenty.
+[M] The forty minutes are already gone regardless of what happens next.
+[F] Continuing doesn't recover them.
+[M] It just adds twenty more minutes to the total loss, purely to avoid admitting the first forty were spent on nothing.
+[M] This test feels almost too simple, and that's exactly why it works.
+[M] The sunk cost fallacy survives on complexity, on all the emotional reasons layered on top of a decision that make it hard to see clearly.
+[M] Stripping the history away removes the fog.
+[M] There's a version of this bias that shows up specifically in creative and personal projects, and it's worth naming because it doesn't feel like a financial decision at all, even though the same math applies.
+[M] Someone spends three years writing a novel that isn't working, that beta readers consistently struggle to connect with, and the honest signal is that a different project would be a better use of the next year.
+[M] But three years feels too significant to have been "for nothing," so the fourth year gets spent too, and often the fifth.
+[F] The sunk cost here isn't money.
+[M] It's identity, the sense that abandoning the project means abandoning who you'd already decided you were, the person writing this specific novel.
+[M] That identity attachment makes this version of the fallacy even harder to catch than the financial version, because walking away doesn't just feel like losing time, it feels like losing a piece of who you thought you were.
+[M] One more thing worth naming, because it trips people up.
+[M] This isn't an argument for quitting everything the moment it gets hard.
+[M] Real growth often requires pushing through difficulty that has nothing to do with sunk costs.
+[M] The test isn't "is this hard." The test is specifically "if I had no history here, would I choose this." Something can be hard and still pass that test completely.
+[F] The two aren't in conflict.
+[M] Try this on one thing you're currently stuck on, something you keep doing purely because you've already put so much into it.
+[M] Run the fresh-eyes test honestly.
+[M] You might find you're exactly where you'd choose to be anyway.
+[M] Or you might find you've been protecting a decision you made years ago, at the cost of every year since.
+[M] If today's video helped you see one blind spot clearly, next week's video covers a different one, the Stoic practice of memento mori, and why deliberately thinking about death might be the most clarifying habit you're not doing.
+[M] Subscribe if you want the full picture, one bias and one piece of ancient philosophy at a time.

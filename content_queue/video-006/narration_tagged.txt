@@ -1,0 +1,50 @@
+[M] The person most convinced they're right is often the person who understands the topic the least.
+[M] This isn't a coincidence, and it isn't about arrogance as a personality trait.
+[M] It's a measurable, repeatable pattern in how human confidence actually works, called the Dunning-Kruger effect, and once you see it, you start noticing it everywhere, including, uncomfortably, in yourself.
+[F] Here's the actual finding, from the original research.
+[M] Psychologists tested people on skills like grammar, logic, and humor, then asked each person to estimate how well they'd done compared to everyone else.
+[M] The people who scored in the bottom twenty five percent consistently rated themselves as above average.
+[M] Not slightly above average.
+[M] Substantially above average, often estimating they'd outperformed the majority of people, when they'd actually outperformed almost nobody.
+[M] The mechanism behind this is the genuinely interesting part, because it's not simply "unskilled people are overconfident." It's more specific and stranger than that.
+[M] The same skills required to perform well at a task are often the same skills required to accurately judge your own performance at that task.
+[M] If you don't understand grammar well, you also don't have the knowledge needed to recognize good grammar when you see it, including your own.
+[M] The incompetence and the inability to detect the incompetence come from the exact same gap in knowledge.
+[M] You'd need the skill to know you're missing the skill.
+[M] This produces a strange curve if you graph it.
+[M] Confidence starts high with almost no knowledge at all, because a small amount of information feels like the whole picture when you don't yet know how much you don't know.
+[M] Then confidence actually drops as people learn more, because more knowledge reveals the size of the topic, and how much they still don't understand.
+[M] Then, only with real expertise, does confidence slowly climb back up, this time actually justified.
+[M] The peak of overconfidence happens surprisingly early, right after someone learns just enough to feel dangerous, and right before they learn enough to feel humbled.
+[M] This explains a specific, very recognizable type of person.
+[M] Someone who read one book on a topic and now argues with people who've spent decades studying it.
+[M] Someone who watched a few videos about nutrition and is now correcting a dietitian.
+[M] This isn't a character flaw unique to certain people.
+[M] It's what everyone's brain does, briefly, at that exact early stage of learning anything, before the real depth of the subject becomes visible.
+[M] There's a specific irony worth naming, because it's the part people find hardest to accept about this research.
+[M] The same study found that highly skilled people tend to underestimate their relative standing, not because they're falsely modest, but because they mistakenly assume tasks that are easy for them must be equally easy for everyone else.
+[M] A genuine expert often thinks "anyone could do this," while a beginner with minimal skill thinks "I've basically mastered this," and both assessments are wrong in exactly opposite directions, for exactly the same underlying reason, a lack of accurate comparison to others.
+[M] This has a specific, measurable effect in workplaces that's worth understanding, because it explains a pattern almost everyone has witnessed firsthand.
+[M] In group settings, confidence is often mistaken for competence, simply because confidence is easier to observe in the moment than actual skill.
+[M] This means the Dunning-Kruger effect doesn't just distort self-perception, it distorts who gets listened to, promoted, and believed, systematically favoring the confidently wrong over the accurately uncertain, unless someone in the room actively corrects for it.
+[M] Here's the part that should genuinely change how you operate, because it applies to you specifically, not just to that one overconfident person you're thinking of right now.
+[M] If you feel completely certain about something you've only spent a small amount of time learning, that certainty itself should be a signal to double check, not a signal to trust.
+[M] The feeling of confidence and the actual accuracy of your knowledge are far less connected than they feel from the inside.
+[M] From the inside, unearned confidence and earned confidence feel identical.
+[M] The only way to tell them apart is from the outside, by checking against people who actually know more.
+[M] There's a specific reason this effect is so hard to correct through experience alone, and it's worth understanding because it explains why some people seem stuck at the overconfident stage for years.
+[M] Normally, making mistakes teaches you where your knowledge ends.
+[M] But the exact deficit that causes overconfidence, not having enough skill to accurately judge your own performance, also prevents you from accurately judging your own mistakes when you make them.
+[M] A beginner who performs poorly often doesn't recognize the poor performance as poor, so the natural feedback loop that would otherwise correct the overconfidence never actually closes on its own.
+[M] This is precisely why external feedback, from someone with more expertise than you currently have, matters so much more at this early stage than it does later, once your own judgment becomes reliable enough to self-correct.
+[M] There's a specific habit worth building here, and it comes directly out of this research.
+[M] Before stating a strong opinion on something you've recently learned about, ask yourself how long you've actually studied it, and compare that honestly to how long an expert in the field has studied it.
+[F] Not to shut yourself up permanently.
+[M] Just to calibrate how much weight your current confidence deserves, versus how much weight it feels like it deserves.
+[M] The flip side of this effect matters too, and it's just as important.
+[M] Genuine experts often underestimate how much they know, because expertise makes the remaining unknowns more visible, not less.
+[M] This is why the most qualified person in a room is often the quietest one, and the least qualified person is often the loudest.
+[M] If you notice that pattern happening around you, or happening from you, that's the Dunning-Kruger curve playing out in real time.
+[M] Last week's video covered amor fati, loving what's already happened instead of resenting it.
+[M] This week's a different kind of blind spot entirely, one about how your own confidence can quietly lie to you.
+[M] Subscribe for next week, back to philosophy, one bias and one idea at a time.
