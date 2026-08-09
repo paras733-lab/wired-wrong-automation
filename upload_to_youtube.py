@@ -14,6 +14,7 @@ regular environment variables if running this locally):
     YOUTUBE_REFRESH_TOKEN
 """
 
+import argparse
 import json
 import os
 from pathlib import Path
@@ -22,8 +23,12 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
-VIDEO_FILE = Path("out/video.mp4")
-METADATA_FILE = Path("video_metadata.json")
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--video", default="out/video.mp4", help="Path to the video file to upload")
+    parser.add_argument("--metadata", default="video_metadata.json", help="Path to the metadata JSON file")
+    return parser.parse_args()
 
 
 def load_credentials():
@@ -41,24 +46,28 @@ def load_credentials():
     )
 
 
-def load_metadata():
-    if not METADATA_FILE.exists():
-        print(f"WARNING: {METADATA_FILE} not found, using placeholder metadata.")
+def load_metadata(metadata_file: Path):
+    if not metadata_file.exists():
+        print(f"WARNING: {metadata_file} not found, using placeholder metadata.")
         return {
             "title": "Untitled Video",
             "description": "",
             "tags": [],
             "privacyStatus": "private",
         }
-    return json.loads(METADATA_FILE.read_text(encoding="utf-8"))
+    return json.loads(metadata_file.read_text(encoding="utf-8"))
 
 
 def main():
-    if not VIDEO_FILE.exists():
-        print(f"ERROR: {VIDEO_FILE} not found. Render the video first.")
+    args = parse_args()
+    video_file = Path(args.video)
+    metadata_file = Path(args.metadata)
+
+    if not video_file.exists():
+        print(f"ERROR: {video_file} not found. Render the video first.")
         raise SystemExit(1)
 
-    metadata = load_metadata()
+    metadata = load_metadata(metadata_file)
     credentials = load_credentials()
     youtube = build("youtube", "v3", credentials=credentials)
 
@@ -75,7 +84,7 @@ def main():
         },
     }
 
-    media = MediaFileUpload(str(VIDEO_FILE), chunksize=-1, resumable=True, mimetype="video/mp4")
+    media = MediaFileUpload(str(video_file), chunksize=-1, resumable=True, mimetype="video/mp4")
 
     print(f"Uploading '{metadata['title']}' as {metadata.get('privacyStatus', 'private')}...")
     request = youtube.videos().insert(part="snippet,status", body=body, media_body=media)

@@ -2,9 +2,9 @@ import React from 'react';
 import {Series, Audio, staticFile, AbsoluteFill} from 'remotion';
 import {Scene} from './Scene';
 import {Watermark} from '../components/Watermark';
-import script from '../scripts/example-script.json';
+import script from '../scripts/short-script.json';
 
-export const ExplainerVideo: React.FC = () => {
+export const ShortVideo: React.FC = () => {
   const fps = script.fps;
 
   return (
@@ -27,7 +27,7 @@ export const ExplainerVideo: React.FC = () => {
   );
 };
 
-export const getTotalDurationInFrames = () => {
+export const getShortDurationInFrames = () => {
   return script.scenes.reduce(
     (sum, s) => sum + Math.round(s.durationInSeconds * script.fps),
     0

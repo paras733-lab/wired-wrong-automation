@@ -1,19 +1,13 @@
 name: Autopilot - Generate, Render, and Upload Next Video
 
-# Runs completely on its own - twice a week, no manual trigger needed.
-# Each run picks the next video waiting in content_queue/, builds it fully
-# (voiceover, timing, visuals, render, upload as Private), then moves that
-# folder into content_published/ so it's never picked twice.
-#
-# Change the schedule below to whatever cadence you want. Times are UTC.
 on:
   schedule:
     - cron: '0 14 * * 1'  # Monday, 14:00 UTC
     - cron: '0 14 * * 4'  # Thursday, 14:00 UTC
-  workflow_dispatch:  # still lets you trigger manually if you ever want to
+  workflow_dispatch:
 
 permissions:
-  contents: write  # needed so the workflow can commit "video published" back to the repo
+  contents: write
 
 jobs:
   build-and-upload-next-video:
@@ -59,6 +53,7 @@ jobs:
         if: steps.pick.outputs.next != ''
         run: pip install edge-tts google-auth google-api-python-client
 
+      # ---- Long-form video ----
       - name: Generate voiceover and scene timing
         if: steps.pick.outputs.next != ''
         run: python generate_multivoice.py
@@ -67,24 +62,65 @@ jobs:
         if: steps.pick.outputs.next != ''
         run: python fill_beats.py
 
-      - name: Render video
+      - name: Render long-form video
         if: steps.pick.outputs.next != ''
         run: npx remotion render src/index.ts Explainer out/video.mp4
 
-      - name: Upload rendered video as a GitHub artifact (backup copy)
+      - name: Upload long-form video as GitHub artifact (backup)
         if: steps.pick.outputs.next != ''
         uses: actions/upload-artifact@v4
         with:
           name: rendered-video-${{ steps.pick.outputs.next }}
           path: out/video.mp4
 
-      - name: Upload to YouTube
+      - name: Upload long-form video to YouTube
         if: steps.pick.outputs.next != ''
         env:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
-        run: python upload_to_youtube.py
+        run: python upload_to_youtube.py --video out/video.mp4 --metadata video_metadata.json
+
+      # ---- Shorts, auto-extracted from the same episode's strongest moments ----
+      - name: Generate and upload Short 1 (opening hook)
+        if: steps.pick.outputs.next != ''
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: |
+          python generate_short.py --index 1
+          npx remotion render src/index.ts Short out/short-1.mp4
+          python upload_to_youtube.py --video out/short-1.mp4 --metadata short_metadata.json
+
+      - name: Generate and upload Short 2
+        if: steps.pick.outputs.next != ''
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: |
+          python generate_short.py --index 2
+          npx remotion render src/index.ts Short out/short-2.mp4
+          python upload_to_youtube.py --video out/short-2.mp4 --metadata short_metadata.json
+
+      - name: Generate and upload Short 3
+        if: steps.pick.outputs.next != ''
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: |
+          python generate_short.py --index 3
+          npx remotion render src/index.ts Short out/short-3.mp4
+          python upload_to_youtube.py --video out/short-3.mp4 --metadata short_metadata.json
+
+      - name: Upload all Shorts as GitHub artifacts (backup)
+        if: steps.pick.outputs.next != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-shorts-${{ steps.pick.outputs.next }}
+          path: out/short-*.mp4
 
       - name: Mark this video as published
         if: steps.pick.outputs.next != ''
@@ -93,5 +129,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           mkdir -p content_published
           git mv "content_queue/${{ steps.pick.outputs.next }}" "content_published/${{ steps.pick.outputs.next }}"
-          git commit -m "Auto-published ${{ steps.pick.outputs.next }}"
+          git commit -m "Auto-published ${{ steps.pick.outputs.next }} (long-form + short)"
           git push

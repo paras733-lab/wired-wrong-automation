@@ -1,0 +1,13 @@
+{
+  "title": "Placeholder",
+  "voiceoverFile": "",
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "placeholder",
+      "durationInSeconds": 3,
+      "caption": "Placeholder - overwritten by generate_short.py",
+      "beat": {"type": "singleFigure", "label": "", "animation": "bounceIn"}
+    }
+  ]
+}
