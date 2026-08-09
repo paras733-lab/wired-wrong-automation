@@ -1,58 +1,97 @@
-name: Generate and Render Video
+name: Autopilot - Generate, Render, and Upload Next Video
 
-# Trigger this by pushing a new/updated narration_tagged.txt - that's the
-# ONLY file you touch to make a new video. Everything else runs automatically.
+# Runs completely on its own - twice a week, no manual trigger needed.
+# Each run picks the next video waiting in content_queue/, builds it fully
+# (voiceover, timing, visuals, render, upload as Private), then moves that
+# folder into content_published/ so it's never picked twice.
+#
+# Change the schedule below to whatever cadence you want. Times are UTC.
 on:
-  workflow_dispatch:
-  push:
-    paths:
-      - "src/scripts/narration_tagged.txt"
+  schedule:
+    - cron: '0 14 * * 1'  # Monday, 14:00 UTC
+    - cron: '0 14 * * 4'  # Thursday, 14:00 UTC
+  workflow_dispatch:  # still lets you trigger manually if you ever want to
+
+permissions:
+  contents: write  # needed so the workflow can commit "video published" back to the repo
 
 jobs:
-  build-video:
+  build-and-upload-next-video:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
+      - name: Pick the next video in the queue
+        id: pick
+        run: |
+          NEXT=$(ls content_queue | grep -v README.txt | sort | head -n 1)
+          if [ -z "$NEXT" ]; then
+            echo "Queue is empty - nothing to do this run."
+            echo "next=" >> "$GITHUB_OUTPUT"
+          else
+            echo "Next video: $NEXT"
+            echo "next=$NEXT" >> "$GITHUB_OUTPUT"
+            cp "content_queue/$NEXT/narration_tagged.txt" src/scripts/narration_tagged.txt
+            cp "content_queue/$NEXT/metadata.json" video_metadata.json
+          fi
+
       - name: Set up Node.js
+        if: steps.pick.outputs.next != ''
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Set up Python
+        if: steps.pick.outputs.next != ''
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install ffmpeg
+        if: steps.pick.outputs.next != ''
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
       - name: Install Node dependencies
+        if: steps.pick.outputs.next != ''
         run: npm install
 
       - name: Install Python dependencies
-        run: pip install edge-tts
+        if: steps.pick.outputs.next != ''
+        run: pip install edge-tts google-auth google-api-python-client
 
-      # Step 1: Turn your script into voiceover audio + timed scene data
       - name: Generate voiceover and scene timing
+        if: steps.pick.outputs.next != ''
         run: python generate_multivoice.py
 
-      # Step 2: Fill in the visuals for each scene based on content
       - name: Fill in scene visuals
+        if: steps.pick.outputs.next != ''
         run: python fill_beats.py
 
-      # Step 3: Render the actual video file
       - name: Render video
+        if: steps.pick.outputs.next != ''
         run: npx remotion render src/index.ts Explainer out/video.mp4
 
-      - name: Upload rendered video
+      - name: Upload rendered video as a GitHub artifact (backup copy)
+        if: steps.pick.outputs.next != ''
         uses: actions/upload-artifact@v4
         with:
-          name: rendered-video
+          name: rendered-video-${{ steps.pick.outputs.next }}
           path: out/video.mp4
 
-      - name: Upload voiceover (for your own reference/reuse)
-        uses: actions/upload-artifact@v4
-        with:
-          name: voiceover-audio
-          path: public/audio/voiceover.mp3
+      - name: Upload to YouTube
+        if: steps.pick.outputs.next != ''
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: python upload_to_youtube.py
+
+      - name: Mark this video as published
+        if: steps.pick.outputs.next != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          mkdir -p content_published
+          git mv "content_queue/${{ steps.pick.outputs.next }}" "content_published/${{ steps.pick.outputs.next }}"
+          git commit -m "Auto-published ${{ steps.pick.outputs.next }}"
+          git push
