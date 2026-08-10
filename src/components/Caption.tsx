@@ -23,8 +23,8 @@ export const Caption: React.FC<Props> = ({text}) => {
     ? {
         position: 'absolute',
         bottom: '22%',   // clears YouTube Shorts' bottom title/channel bar
-        left: '6%',
-        right: '20%',    // clears the right-edge like/comment/share column
+        left: '18%',
+        right: '6%',
         textAlign: 'center',
         opacity,
       }
