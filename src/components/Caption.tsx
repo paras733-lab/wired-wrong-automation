@@ -22,9 +22,9 @@ export const Caption: React.FC<Props> = ({text}) => {
   const containerStyle: React.CSSProperties = isVertical
     ? {
         position: 'absolute',
-        bottom: '22%',   // clears YouTube Shorts' bottom title/channel bar
-        left: '18%',
-        right: '6%',
+        bottom: '22%',
+        left: '10%',
+        right: '10%',
         textAlign: 'center',
         opacity,
       }
