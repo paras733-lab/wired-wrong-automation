@@ -28,6 +28,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--video", default="out/video.mp4", help="Path to the video file to upload")
     parser.add_argument("--metadata", default="video_metadata.json", help="Path to the metadata JSON file")
+    parser.add_argument("--thumbnail", default=None, help="Optional path to a custom thumbnail image")
     return parser.parse_args()
 
 
@@ -98,6 +99,23 @@ def main():
     video_id = response["id"]
     print(f"\nDone. Video uploaded: https://youtube.com/watch?v={video_id}")
     print(f"Privacy status: {metadata.get('privacyStatus', 'private')}")
+
+    if args.thumbnail and Path(args.thumbnail).exists():
+        print(f"Setting custom thumbnail from {args.thumbnail}...")
+        try:
+            youtube.thumbnails().set(
+                videoId=video_id,
+                media_body=MediaFileUpload(args.thumbnail, mimetype="image/png"),
+            ).execute()
+            print("Thumbnail set successfully.")
+        except Exception as e:
+            # Custom thumbnails require a phone-verified channel. If this
+            # fails, the upload itself still succeeded - just log it and
+            # move on rather than failing the whole run.
+            print(f"WARNING: could not set custom thumbnail ({e}). "
+                  f"This usually means the channel isn't phone-verified yet. "
+                  f"The video uploaded fine, YouTube just picked a default thumbnail.")
+
     print("Review it and switch to Public in YouTube Studio when you're ready.")
 
 

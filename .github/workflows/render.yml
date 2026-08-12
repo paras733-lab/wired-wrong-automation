@@ -62,6 +62,14 @@ jobs:
         if: steps.pick.outputs.next != ''
         run: python fill_beats.py
 
+      - name: Generate thumbnail data
+        if: steps.pick.outputs.next != ''
+        run: python generate_thumbnail.py
+
+      - name: Render thumbnail image
+        if: steps.pick.outputs.next != ''
+        run: npx remotion still src/index.ts Thumbnail out/thumbnail.png
+
       - name: Render long-form video
         if: steps.pick.outputs.next != ''
         run: npx remotion render src/index.ts Explainer out/video.mp4
@@ -79,7 +87,7 @@ jobs:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
-        run: python upload_to_youtube.py --video out/video.mp4 --metadata video_metadata.json
+        run: python upload_to_youtube.py --video out/video.mp4 --metadata video_metadata.json --thumbnail out/thumbnail.png
 
       # ---- Shorts, auto-extracted from the same episode's strongest moments ----
       - name: Generate and upload Short 1 (opening hook)
