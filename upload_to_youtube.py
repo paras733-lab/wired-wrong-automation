@@ -17,6 +17,7 @@ regular environment variables if running this locally):
 import argparse
 import json
 import os
+import re
 from pathlib import Path
 
 from google.oauth2.credentials import Credentials
@@ -29,7 +30,48 @@ def parse_args():
     parser.add_argument("--video", default="out/video.mp4", help="Path to the video file to upload")
     parser.add_argument("--metadata", default="video_metadata.json", help="Path to the metadata JSON file")
     parser.add_argument("--thumbnail", default=None, help="Optional path to a custom thumbnail image")
+    parser.add_argument("--post-comment", action="store_true", help="Post an engagement question as a comment after upload")
     return parser.parse_args()
+
+
+QUESTION_RULES = [
+    (r"sunk cost", "What's something you're still doing purely because you've already invested in it? Curious what your sunk cost is."),
+    (r"memento mori|mortal", "Has a brush with mortality ever changed how you spent your time afterward? Would love to hear your story."),
+    (r"confirmation bias|lying to you", "What's a belief you hold that you've never actually tried to argue against? Try it this week and tell me what you find."),
+    (r"amor fati|love your fate", "What's the hardest thing you've had to make peace with in your life?"),
+    (r"dunning|kruger|confident", "Have you ever been confidently wrong about something? What snapped you out of it?"),
+    (r"obstacle", "What's an obstacle you're dealing with right now that might actually be exactly what you need?"),
+    (r"loss aversion|losing \$100", "What's something you're holding onto purely because letting go feels like losing, even though keeping it is the real cost?"),
+    (r"short life|seneca|wasted", "If you tracked your last week honestly, how many hours were truly chosen versus just... happened to you?"),
+]
+DEFAULT_QUESTION = "What's one idea from this video you're actually going to try this week? Genuinely curious."
+
+
+def pick_question(title: str) -> str:
+    lowered = title.lower()
+    for pattern, question in QUESTION_RULES:
+        if re.search(pattern, lowered):
+            return question
+    return DEFAULT_QUESTION
+
+
+def post_engagement_comment(youtube, video_id: str, title: str):
+    question = pick_question(title)
+    try:
+        youtube.commentThreads().insert(
+            part="snippet",
+            body={
+                "snippet": {
+                    "videoId": video_id,
+                    "topLevelComment": {"snippet": {"textOriginal": question}},
+                }
+            },
+        ).execute()
+        print(f"Posted engagement comment: {question!r}")
+        print("Note: pinning this comment still needs to be done manually in YouTube Studio "
+              "(one click) - the API doesn't support pinning.")
+    except Exception as e:
+        print(f"WARNING: could not post engagement comment ({e}). Video upload itself still succeeded.")
 
 
 def load_credentials():
@@ -117,6 +159,9 @@ def main():
                   f"The video uploaded fine, YouTube just picked a default thumbnail.")
 
     print("Review it and switch to Public in YouTube Studio when you're ready.")
+
+    if args.post_comment:
+        post_engagement_comment(youtube, video_id, metadata["title"])
 
 
 if __name__ == "__main__":

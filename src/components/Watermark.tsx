@@ -45,7 +45,7 @@ export const Watermark: React.FC = () => {
           color: '#2B2D42',
         }}
       >
-        Wired Wrong
+        Wired Wrong · Subscribe
       </span>
     </div>
   );
